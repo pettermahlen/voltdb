@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+This is a mini-pom that allows packaging javadoc and sources for easier inclusion into IDEs. Compilation isn't supported, since the VoltDB
+source structure doesn't support that in a good way. 
+
+To package sources, run the following command:
+
+mvn source:jar
+
+To deploy sources, do something like (replace versions repositoryIds and urls with stuff that works in your local setup):
+   mvn deploy:deploy-file -DpomFile=pom.xml -DrepositoryId=thirdparty -Durl=http://nexus.shopzilla.com:2099/nexus/content/repositories/thirdparty -Dfile=target/voltdbclient-2.1.1-sources.jar -Dpackaging=jar -Dclassifier=sources
+
+For javadoc, do (again correcting installation- and version-dependent stuff):
+
+mvn javadoc:jar
+mvn deploy:deploy-file -DpomFile=pom.xml -DrepositoryId=thirdparty -Durl=http://nexus.shopzilla.com:2099/nexus/content/repositories/thirdparty -Dfile=target/voltdb-client-2.1.1-javadoc.jar -Dpackaging=javadoc
+   
+   -->
+  <groupId>org.voltdb</groupId>
+  <artifactId>voltdbclient</artifactId>
+  <version>2.1.1</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <sourceDirectory>src/frontend</sourceDirectory>
+  </build>
+
+  <distributionManagement>
+    <!-- Defines where to deploy artifacts to -->
+    <repository>
+      <id>thirdparty</id>
+      <name>thirdparty</name>
+      <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/thirdparty/</url>
+    </repository>
+  </distributionManagement>
+</project>
